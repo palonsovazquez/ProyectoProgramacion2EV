@@ -1,6 +1,27 @@
+/**
+ * module of  FoFiUn (provisional name)
+ * Copyright (C) Pablo Alonso Vázquez.
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
+ *
+ * @author Pablo Alonso Vazquez <pav.vigo@gmail.com>
+ **/
 package proyectoprogramacion1;
 import  proyectoprogramacion1.Controlador.Controlador;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
@@ -8,21 +29,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileFilter;
+
 import proyectoprogramacion1.Ficha.Ficha;
 import proyectoprogramacion1.Parser.Parser;
-import proyectoprogramacion1.ProyectoProgramacion1;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author Pablo Alonso Vazquez <pav.vigo@gmail.com>
- */
+
 public class Demo1 {
 
     public Demo1() {
@@ -34,9 +46,14 @@ public class Demo1 {
        File fichero = jfiCho.getSelectedFile();
        if ((fichero == null) || (fichero.getName().equals(""))) {
  JOptionPane.showMessageDialog(null, "Nombre de archivo inválido", "Nombre de archivo inválido", JOptionPane.ERROR_MESSAGE);
-}else{ // fin de if
-    // File fichero = new File("/home/pablo/NetBeansProjects/prueba_ficheros23/datos.txt");
-          Controlador controlador = new Controlador(fichero);
+}else{ 
+    
+          Controlador controlador = null;
+           try {
+               controlador = new Controlador(fichero);
+           } catch (FileNotFoundException ex) {
+               System.out.println(ex);
+           }
           Ficha ficha = null;
           String str_auxString ="\n-------------------------------------\n";
           
@@ -50,7 +67,7 @@ public class Demo1 {
             Logger.getLogger(ProyectoProgramacion1.class.getName()).log(Level.SEVERE, null, ex);
         }
         Parser parser = new Parser(ficha);
-        //System.out.println(ficha.toString());
+        
         
         if (ficha != null){
         
