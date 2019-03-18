@@ -1,0 +1,13 @@
+DECLARE
+FUE,Fuerza,6;
+DES,Destreza,10;
+AGI,Agilidad,30;
+BEGIN
+(FUE*(5.5*2)+5)+5*9/8;
+((FUE*2,7)+5);
+((FUE*2)+5);
+((AGI/2)*DES);
+(DES*9/8*(FUE-AGI))
+END
+
+
